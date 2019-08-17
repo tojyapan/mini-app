@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-xl navbar-dark bg-dark mt-0 mb-3 fixed-top ">
+    <a class="navbar-brand" href="#">Tweet</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav3" aria-controls="navbarNav3" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav3">
+        <ul class="navbar-nav">
+          <% if user_signed_in? %>
+            <li class="nav-item">
+              <%= link_to 'Sign out', destroy_user_session_path,　method: :delte, class: "nav-link" %>
+            </li>
+          <% else %>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="modal" data-target="#signUpModal">Sign up</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" data-toggle="modal" data-target="#logInModal">Sign in</a>
+            </li>
+          <% end %>
+        </ul>
+    </div>
+</nav>
+
+<div id="tweets" class="pt-5">
+  <%= render 'tweets', tweets: @tweets %>
+</div>
+<div id="tweet-modal">
+
+</div>
+
+<% if user_signed_in? %>
+  <div class="fixed-bottom">
+    <%= link_to 'tweet', new_tweet_path, remote: true, class: "btn btn-dark btn-default p-0 btn-block" %>
+  </div>
+<% end %>

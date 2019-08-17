@@ -1,0 +1,36 @@
+<div class="my-3 p-3 bg-white rounded box-shadow">
+  <h6 class="border-bottom border-gray pb-2 mb-0">Tweet List</h6>
+
+  <% tweets.each do |tweet| %>
+    <div class="media text-muted pt-3">
+      <p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray row">
+        <% if user_signed_in? && current_user.id == tweet.user_id %>
+          <strong class="d-block text-gray-dark col-10">
+            @<%= tweet.user.name %>
+          </strong>
+          <strong class="d-block test-gray-dark col-1">
+            <%= link_to edit_tweet_path(tweet), method: :get, remote: true do %>
+              <%= fa_icon('edit') %>
+            <% end %>
+          </strong>
+          <strong class="d-block test-gray-dark col-1">
+            <%= link_to tweet_path(tweet), method: :delete, remote: true, data: {confirm: "削除しますか？"} do %>
+              <%= fa_icon('trash') %>
+            <% end %>
+          </strong>
+          <i class="d-block ml-3">
+            <%= tweet.text %>
+          </i>
+        <% else %>
+          <strong class="d-block text-gray-dark col-12">
+            @<%= tweet.user.name %>
+          </strong>
+          <i class="d-block ml-3">
+            <%= tweet.text %>
+          </i>
+        <% end %>
+      </p>
+    </div>
+  <% end %>
+
+</div>
