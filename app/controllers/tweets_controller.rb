@@ -45,7 +45,7 @@ class TweetsController < ApplicationController
   end
 
   def set_tweets
-    @tweets = Tweet.order("created_at DESC").includes(:user).limit(20)
+    @tweets = Tweet.order("created_at DESC").includes(:user)
   end
 
   def respond_tweet
